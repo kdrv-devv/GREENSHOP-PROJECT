@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import searchLogo from "../../assets/icons/search-icon.svg";
 import cartLogo from "../../assets/icons/cart.svg";
 import exitLogo from '../../assets/icons/exit-logo.svg'
 import { Badge } from "antd";
 import { BellOutlined } from "@ant-design/icons";
+import { useReduxDispatch, useReduxSelector } from "../../hooks/useRedux";
+import { setAuthorizationModalVisibility } from "../../redux/modal-slice";
 
 const Navbar = () => {
+  const dispatch = useReduxDispatch()
+  
+  const navigate = useNavigate()
+
   return (
     <>
       <header className="navbar">
@@ -16,8 +22,8 @@ const Navbar = () => {
             <img  className="w-[15rem] h-[3.4rem] " src={logo} alt="" />{" "}
           </Link>
           <nav className="header-center h-full font-normal text-[1.6rem] text-[#3D3D3D] flex items-center gap-[5rem]">
-            <h3 className="font-bold menu-item active">Home</h3>
-            <h3 >Blog</h3>
+            <h3 onClick={()=> navigate("/")} className="font-bold !text-[#46A358] menu-item active cursor-pointer">Home</h3>
+            <h3 onClick={()=> navigate("/blog")} className="cursor-pointer"  >Blog</h3>
           </nav>
           <nav className="header-right flex items-center gap-[3rem]">
             <button>
@@ -31,7 +37,7 @@ const Navbar = () => {
               <img src={cartLogo} alt="cart" />
                 </Badge>
             </button>
-            <button className="bg-[#46a358] w-[10rem] h-[3.5rem] rounded-[0.6rem] flex items-center justify-center gap-[0.4rem] font-medium text-[1.6rem] text-[#fff] ">
+            <button onClick={()=> dispatch(setAuthorizationModalVisibility())} className="bg-[#46a358] w-[10rem] h-[3.5rem] rounded-[0.6rem] flex items-center justify-center gap-[0.4rem] font-medium text-[1.6rem] text-[#fff] ">
                 <img src={exitLogo} alt="" />
                 Login
             </button>
