@@ -37,7 +37,7 @@ const Navbar = () => {
               <img src={cartLogo} alt="cart" />
                 </Badge>
             </button>
-            <button onClick={()=> dispatch(setAuthorizationModalVisibility())} className="bg-[#46a358] w-[10rem] h-[3.5rem] rounded-[0.6rem] flex items-center justify-center gap-[0.4rem] font-medium text-[1.6rem] text-[#fff] ">
+            <button onClick={()=> dispatch(setAuthorizationModalVisibility({open:true , isLoading:false}))} className="bg-[#46a358] w-[10rem] h-[3.5rem] rounded-[0.6rem] flex items-center justify-center gap-[0.4rem] font-medium text-[1.6rem] text-[#fff] ">
                 <img src={exitLogo} alt="" />
                 Login
             </button>

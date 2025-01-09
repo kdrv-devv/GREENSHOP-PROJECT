@@ -16,8 +16,12 @@ const AuthorizationModal = () => {
   return (
     <>
       <Modal
-        open={authorizationModalVisibility}
-        onCancel={() => dispatch(setAuthorizationModalVisibility())}
+        open={authorizationModalVisibility.open}
+        onCancel={() =>
+          dispatch(
+            setAuthorizationModalVisibility({ open: false, isLoading: false })
+          )
+        }
         footer={false}
       >
         <div className="flex items-center justify-center gap-[1.2rem] mt-6">
