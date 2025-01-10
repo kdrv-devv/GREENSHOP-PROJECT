@@ -3,57 +3,31 @@ import type { FieldType } from "../../../../@types";
 // import img
 import google from "../../../../assets/icons/google.svg";
 import facebook from "../../../../assets/icons/facebook.svg";
-import { useAxios } from "../../../../hooks/useAxios";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useReduxDispatch, useReduxSelector } from "../../../../hooks/useRedux";
 import { setAuthorizationModalVisibility } from "../../../../redux/modal-slice";
-import useSignIn from "react-auth-kit/hooks/useSignIn";
-import { signInWithGoogle } from "../../../../config";
+import {
+  loginWithGoogle,
+  useLogin,
+} from "../../../../hooks/useQuery/useQueryActions";
+
 const Login = () => {
   const { authorizationModalVisibility } = useReduxSelector(
     (state) => state.modalSlice
   );
 
-  const signIn = useSignIn();
-
   const dispatch = useReduxDispatch();
-  const axios = useAxios();
+  const { mutate } = useLogin();
+  const { mutate: mutateGoogle } = loginWithGoogle();
+
   const onFinish = (e: FieldType) => {
     dispatch(setAuthorizationModalVisibility({ open: true, isLoadnig: true }));
-    axios({ url: "/user/sign-in", body: e, method: "POST" })
-      .then((data) => {
-        console.log(data);
-        dispatch(
-          setAuthorizationModalVisibility({ open: false, isLoadnig: false })
-        );
-        const { token, user } = data.data;
-        localStorage.setItem("token", token);
-        signIn({
-          auth: {
-            token,
-            type: "Bearer",
-          },
-          userState: user,
-        });
-      })
-      .catch(() => {
-        dispatch(
-          setAuthorizationModalVisibility({ open: true, isLoadnig: false })
-        );
-      });
+    mutate({ data: e });
   };
 
-  const signInGoogle = async () => {
-    const response = await signInWithGoogle();
-    axios({
-      url: "/user/sign-in/google",
-      method: "POST",
-      body: { email: response.user.email },
-    }).then(data  => console.log(data))
-    console.log(response);
-  };
+  const signInGoogle = async () => mutateGoogle();
 
-  //   raimjonov05@mail.ru
+  // raimjonov05@mail.ru
   // 12345678
   return (
     <div className="w-[65%] m-auto mt-[5.3rem]">

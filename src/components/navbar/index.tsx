@@ -5,7 +5,7 @@ import cartLogo from "../../assets/icons/cart.svg";
 import exitLogo from '../../assets/icons/exit-logo.svg'
 import { Badge } from "antd";
 import { BellOutlined } from "@ant-design/icons";
-import { useReduxDispatch, useReduxSelector } from "../../hooks/useRedux";
+import { useReduxDispatch} from "../../hooks/useRedux";
 import { setAuthorizationModalVisibility } from "../../redux/modal-slice";
 
 const Navbar = () => {
