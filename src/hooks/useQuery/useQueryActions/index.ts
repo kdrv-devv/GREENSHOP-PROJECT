@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { notificationApi } from "../../../generic/notification";
 import { signInWithGoogle } from "../../../config";
 import { useReduxDispatch } from "../../useRedux";
+import { AuthUser } from "../../../@types";
 
 const useLogin = () => {
   const dispatch = useDispatch();
@@ -13,13 +14,11 @@ const useLogin = () => {
   return useMutation({
     mutationFn: ({ data }: { data: object }) =>
       axios({ url: "/user/sign-in", body: data, method: "POST" }),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: ({data} : {data:{token:string , user:AuthUser}}) => {
       dispatch(
         setAuthorizationModalVisibility({ open: false, isLoadnig: false })
       );
-
-      const { token } = data.data;
+      const { token } = data;
       localStorage.setItem("token", token);
       notify("login");
     },
@@ -46,11 +45,11 @@ const loginWithGoogle = () => {
         body: { email: response.user.email },
       });
     },
-    onSuccess: (data) => {
+    onSuccess: ({data} : {data:{token:string , user:AuthUser}}) => {
       dispatch(
         setAuthorizationModalVisibility({ open: false, isLoadnig: false })
       );
-      const { token } = data.data;
+      const { token } = data;
       localStorage.setItem("token", token);
       notify("login");
       console.log(data);
@@ -71,7 +70,7 @@ const useRegister = () => {
   return useMutation({
     mutationFn: ({ data }: { data: object }) =>
       axios({ url: "/user/sign-up/", method: "POST", body: data }),
-    onSuccess: (data) => {
+    onSuccess: ({data} : {data:{token:string , user:AuthUser}}) => {
       console.log(data);
       dispatch(
         setAuthorizationModalVisibility({ open: false, isLoading: false })
@@ -100,7 +99,7 @@ const useRegisterWithGoogle = () => {
         body: { email: response.user.email },
       });
     },
-    onSuccess: (data) => {
+    onSuccess: ({data} : {data:{token:string , user:AuthUser}}) => {
       const { token } = data;
       localStorage.setItem("token", token);
       notify("register");
