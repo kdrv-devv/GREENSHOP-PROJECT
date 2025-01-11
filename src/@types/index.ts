@@ -53,3 +53,14 @@ export interface HeroSliderType {
   small_img_url: string;
   buttonText: string;
 }
+
+// home category type
+export interface CategoryType {
+  count: number;
+  created_at: string;
+  created_by: string;
+  route_path: string;
+  title: string;
+  __v: number;
+  _id: string;
+}

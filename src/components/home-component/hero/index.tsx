@@ -7,7 +7,7 @@ const Hero = () => {
 
   return (
     <Carousel autoplay className=" mt-[1.5rem]">
-        {hero_mock.map((value:HeroSliderType) => <HeroItem {...value}/>)}
+        {hero_mock.map((value:HeroSliderType) => <HeroItem key={value.id} {...value}/>)}
     </Carousel>
   );
 };

@@ -4,13 +4,13 @@ import { useAxios } from "../useAxios";
 interface UseQueryType {
   pathname: string;
   url: string;
-  params: object;
+  params?: object;
 }
 
 const useQuerHandler = ({ pathname, url, params }: UseQueryType) => {
   const axios = useAxios();
   return useQuery([pathname], {
-    queryFn: () => axios({ url, params }).then((data) => data.data),
+    queryFn: () => axios({ url, params }).then((data) => data),
   });
 };
 
