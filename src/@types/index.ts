@@ -54,13 +54,43 @@ export interface HeroSliderType {
   buttonText: string;
 }
 
-// home category type
+// home: category type
 export interface CategoryType {
   count: number;
   created_at: string;
   created_by: string;
   route_path: string;
   title: string;
+  __v: number;
+  _id: string;
+}
+
+
+// discount type
+export interface DiscounType {
+  discoount_up_to: number;
+  id: number;
+  poster_image_url: string;
+  title: string;
+}
+
+export interface CartType {
+  category: string;
+  comments: string[];
+  created_at: string;
+  created_by: string;
+  description: string;
+  detailed_images: string[];
+  discount: boolean;
+  discount_price: string;
+  main_image: string;
+  price: number;
+  rate: number;
+  short_description: string;
+  sold_times: number;
+  tags: string[];
+  title: string;
+  views: number;
   __v: number;
   _id: string;
 }

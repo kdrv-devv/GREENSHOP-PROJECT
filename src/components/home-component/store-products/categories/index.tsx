@@ -1,11 +1,11 @@
-import { Slider } from "antd";
 import { CategoryType } from "../../../../@types";
+import { useLoader } from "../../../../generic/loading";
 import { useQuerHandler } from "../../../../hooks/useQuery";
 import CategoriesItem from "./categories-item";
-import { useState } from "react";
+import PriceParam from "./categories-item/price";
+import Discount from "./discount";
 
 const Categories = () => {
-    const [price , setPrice] = useState<number[]>([0,1000])
   const {
     data,
     isLoading,
@@ -15,24 +15,24 @@ const Categories = () => {
       pathname: "categories",
       url: "/flower/category",
     });
-  return (
-    <div className="w-[31rem] p-[1.4rem] bg-[#FBFBFB]">
-      <h3 className="font-bold text-[1.8rem] text-[#3D3D3D]">Categories</h3>
-      <div className="category-bottom p-[1.8rem] flex flex-col gap-[2.2rem]">
-        {isLoading || isError
-          ? ""
-          : data?.map((value: CategoryType) => (
-              <CategoriesItem key={value._id} {...value} />
-            ))}
-      </div>
 
-      <div className="mt-[3.6rem]">
-        <h3 className="font-bold text-[1.8rem] text-[#3D3D3D]">Price Range</h3>
-        <div className="px-[1.8rem]">
-          <Slider min={price[0]} max={price[1]} range defaultValue={price} onChange={(e) => setPrice(e)} />
-          <h5>Price: <span>{price[0]}$ - {price[1]}$</span></h5>
+    const {category_loader} = useLoader()
+
+  return (
+    <div className="w-[33rem]  bg-[#FBFBFB]">
+      <div className="p-[1.4rem]">
+        <h3 className="font-bold text-[1.8rem] text-[#3D3D3D]">Categories</h3>
+        <div className="category-bottom p-[1.8rem] flex flex-col gap-[1.5rem]">
+          {isLoading || isError
+            ? category_loader()
+            : data?.map((value: CategoryType) => (
+                <CategoriesItem key={value._id} {...value} />
+              ))}
         </div>
+
+        <PriceParam />
       </div>
+      <Discount />
     </div>
   );
 };
