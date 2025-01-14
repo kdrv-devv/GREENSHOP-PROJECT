@@ -5,9 +5,12 @@ const searchParam = () => {
 
   const getParam = (path:string) => params.get(path)
   const setParam = (param:object) => {
-    setParam({
+    setParams({
         ...param
     })
   };
   return {getParam , setParam}
 };
+
+
+export {searchParam}

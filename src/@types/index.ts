@@ -94,3 +94,10 @@ export interface CartType {
   __v: number;
   _id: string;
 }
+
+
+export interface TitleCategoryType {
+  id:number
+  title:string
+  label:string
+}
