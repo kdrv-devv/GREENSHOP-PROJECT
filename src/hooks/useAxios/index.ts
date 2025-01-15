@@ -25,7 +25,6 @@ export const useAxios = () => {
       },
     })
       .then((data) => data.data.data)
-    //   .catch((error) => console.log(error.message, "Error"));
   };
   return response;
 };
