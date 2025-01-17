@@ -101,3 +101,10 @@ export interface TitleCategoryType {
   title:string
   label:string
 }
+
+
+export interface DataType {
+  isLoading: boolean;
+  isError: boolean;
+  data?: CartType;
+}

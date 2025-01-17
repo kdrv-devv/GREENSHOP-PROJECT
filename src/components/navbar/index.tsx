@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="navbar">
+      <header className="navbar w-[90%] m-auto">
         <div className="container w-[90%] m-auto flex items-center justify-between p-[3rem] border-b border-green-500 border-opacity-50  ">
           <Link className="header-left" to={"/"}>
             {" "}
